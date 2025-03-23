@@ -1,7 +1,7 @@
 import textwrap
 from PythonAlloyClient import AlloyServer
 
-class TestJail():
+class TestSyntax():
     def check_syntax(self, alloy_code):
         server = AlloyServer()
         server.start()
