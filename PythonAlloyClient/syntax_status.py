@@ -4,11 +4,11 @@ class SyntaxStatus:
     
     **Attributes**
     * `success` (`bool`): True if the syntax check passed, False otherwise    
-    * `error_type` (`str`): Type of error, None if success is True    
-    * `line_number` (`int`): Line number where the error occurred, None if success is True    
-    * `column_number` (`int`): Column number where the error occurred, None if success is True    
-    * `error_message` (`str`): Error message, None if success is True    
-    * `full_error_message` (`str`): Full error message from Alloy, None if success is True
+    * `error_type` (`str`): Type of error, None if `success` is True    
+    * `line_number` (`int`): Line number where the error occurred, None if `success` is True    
+    * `column_number` (`int`): Column number where the error occurred, None if `success` is True    
+    * `error_message` (`str`): Error message, None if `success` is True    
+    * `full_error_message` (`str`): Full error message from Alloy, None if `success` is True
 
     If a syntax check failed due to an unexpected error, the `full_error_message` attribute will contain the error message, `success` will be False, and all other attributes will be None.
     """
