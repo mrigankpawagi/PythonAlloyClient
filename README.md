@@ -21,7 +21,7 @@ pip install -e .
 ## Requirements
 
 - Python 3.6+
-- Java Runtime Environment (JRE) for running the Alloy language server
+- Java Virtual Machine (JVM) 17 or later for running the Alloy language server
 
 ## Usage
 
