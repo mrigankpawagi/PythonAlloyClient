@@ -6,6 +6,7 @@ import random
 import threading
 import os
 import re
+from .syntax_status import SyntaxStatus
 
 # get path to internal Alloy jar
 internal_jar_path = os.path.join(
@@ -143,23 +144,10 @@ class AlloyServer:
         self.print(f"Received content: {content}")
         return json.loads(content)
 
-    def check_syntax(self, alloy_code: str) -> tuple[bool, dict]:
+    def check_syntax(self, alloy_code: str) -> SyntaxStatus:
         """
-        Check Alloy code syntax by sending to language server
-        Returns (success, error)
-        
-        The `success` value is True if the syntax check passed, and False otherwise.
-        
-        The `error` value is a dictionary with the following keys:
-        - `full_error_message`: Full error message from Alloy
-        - `error_type`: Type of error
-        - `line_number`: Line number of error
-        - `column_number`: Column number of error
-        - `error_message`: Narrowed down error message
-        
-        If `success` is True, all values in `error` will be None.
-        If an unexpected error occurs, `success` will be False and the `full_error_message` key
-        of `error` will contain the error message while all other keys will be None.
+        Check Alloy code syntax by sending to language server.
+        Returns a SyntaxStatus object containing the syntax check result.
         """
         if not self.client_socket:
             raise RuntimeError("Server not connected")
@@ -244,29 +232,18 @@ class AlloyServer:
                 # get the remaining lines of the error message
                 narrowed_error_message = ("\n".join(error_message.split("\n")[1:])).strip()
 
-                return False, {
+                error_dict = {
                     "full_error_message": error_message,
                     "error_type": error_type,
                     "line_number": line_number,
                     "column_number": column_number,
                     "error_message": narrowed_error_message
                 }
+                return SyntaxStatus(False, error_dict)
 
-            return True, {
-                "full_error_message": None,
-                "error_type": None,
-                "line_number": None,
-                "column_number": None,
-                "error_message": None
-            }
+            return SyntaxStatus(True)
 
         except Exception as e:
             if os.path.exists(tmp_file):
                 os.remove(tmp_file)
-            return False, {
-                "full_error_message": str(e),
-                "error_type": None,
-                "line_number": None,
-                "column_number": None,
-                "error_message": None
-            }
+            return SyntaxStatus(False, str(e))
