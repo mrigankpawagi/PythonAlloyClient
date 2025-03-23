@@ -19,4 +19,5 @@ setup(
     install_requires=[
         dep.strip() for dep in open('requirements.txt').readlines()
     ],
+    package_data={'PythonAlloyClient': ['resources/*']}
 )
