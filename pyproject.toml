@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PythonAlloyClient"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python Client for the Alloy Language Server"
 readme = "README.md"
 authors = [
