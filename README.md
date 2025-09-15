@@ -87,6 +87,16 @@ from PythonAlloyClient import AlloyServer
 server = AlloyServer(quiet=False)
 ```
 
+You can also set the `try_get_diagnostics` parameter while checking syntax in order to catch any error-level diagnostics sent by the server. This can be useful for cases where the syntax is correct but there are compilation errors like type-errors. It is set to `False` by default, and has a very minor time overhead. The error returned in this case will have `error_type` as `Diagnostics error`.
+
+```python
+from PythonAlloyClient import AlloyServer
+
+server = AlloyServer()
+server.start()
+syntax_check = server.check_syntax(alloy_code, try_get_diagnostics=True)
+```
+
 ## Development
 
 ### Setting Up the Development Environment

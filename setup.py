@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='PythonAlloyClient',
-    version='0.1.2',
+    version='0.1.3',
     author='Mrigank Pawagi',
     author_email='mrigankpawagi@gmail.com',
     description='Python Client for the Alloy Language Server',
