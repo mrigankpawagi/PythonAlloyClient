@@ -262,7 +262,7 @@ class AlloyServer:
                 
                 # Keep reading messages until we find diagnostics or timeout
                 while True:
-                    _msg = self._read_lsp_message_single_with_timeout(0.5)
+                    _msg = self._read_lsp_message_single_with_timeout(1.5)
                     if not _msg or _msg.get("method") == "textDocument/publishDiagnostics":
                         diagnostics = _msg
                         break
